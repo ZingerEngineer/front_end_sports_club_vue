@@ -1,7 +1,7 @@
 <template>
   <Disclosure
     as="nav"
-    class="bg-gray-800"
+    class="nav-bar backdrop-blur-sm w-full absolute z-10"
     v-slot="{ open }"
   >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -31,7 +31,7 @@
           <div class="flex flex-shrink-0 items-center">
             <img
               class="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+              :src="teamLogo"
               alt="Your Company"
             />
           </div>
@@ -56,18 +56,6 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <button
-            type="button"
-            class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-          >
-            <span class="absolute -inset-1.5" />
-            <span class="sr-only">View notifications</span>
-            <BellIcon
-              class="h-6 w-6"
-              aria-hidden="true"
-            />
-          </button>
-
           <!-- Profile dropdown -->
           <Menu
             as="div"
@@ -81,7 +69,7 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  :src="userIcon"
                   alt=""
                 />
               </MenuButton>
@@ -156,6 +144,7 @@
 </template>
 
 <script setup>
+import teamLogo from '../assets/team_logo.png'
 import {
   Disclosure,
   DisclosureButton,
@@ -165,12 +154,27 @@ import {
   MenuItem,
   MenuItems
 } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import userIcon from '../assets/user.svg'
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false }
+  { name: 'Home', href: '#', current: true },
+  { name: 'Members', href: '#', current: false },
+  { name: 'Coaches', href: '#', current: false },
+  { name: 'Teams', href: '#', current: false },
+  { name: 'Sponsors', href: '#', current: false },
+  { name: 'Matches', href: '#', current: false }
 ]
 </script>
+
+<style>
+.nav-bar::after {
+  position: absolute;
+  text-align: center;
+  left: 7.5%;
+  width: 85%;
+  content: '';
+  border-style: solid;
+  border-color: white;
+  border-width: 0px 0px 2px 0px;
+}
+</style>
